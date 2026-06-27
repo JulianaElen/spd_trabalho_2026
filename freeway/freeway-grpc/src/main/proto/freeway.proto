@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option java_package = "freeway.grpc.proto";
+option java_outer_classname = "FreewayProto";
+option java_multiple_files = true;
+
+package freeway;
+
+// Estado completo do jogo enviado pelo servidor ao cliente
+message GameStateProto {
+    int32 rows        = 1;
+    int32 cols        = 2;
+    repeated int32 grid        = 3;  // ROWS*COLS valores linearizados
+    int32 num_players = 4;
+    repeated int32 player_row  = 5;
+    repeated int32 player_col  = 6;
+    repeated int32 scores      = 7;
+}
+
+// Ação enviada pelo cliente ao servidor
+message PlayerAction {
+    int32  player_id = 1;
+    string action    = 2;  // "UP" ou "DOWN"
+}
+
+// Resposta ao entrar no jogo
+message JoinResponse {
+    int32 player_id = 1;
+}
+
+// Mensagem vazia
+message Empty {}
+
+service FreewayService {
+    // Cliente solicita entrar no jogo
+    rpc Join(Empty) returns (JoinResponse);
+
+    // Servidor transmite estado do jogo continuamente (server streaming)
+    rpc StreamState(Empty) returns (stream GameStateProto);
+
+    // Cliente envia ação (UP/DOWN)
+    rpc SendAction(PlayerAction) returns (Empty);
+}
