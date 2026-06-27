@@ -22,6 +22,8 @@ set CP=%CP%;%M2%\%G%\grpc-api\%GV%\grpc-api-%GV%.jar
 set CP=%CP%;%M2%\%G%\grpc-core\%GV%\grpc-core-%GV%.jar
 set CP=%CP%;%M2%\%G%\grpc-protobuf-lite\%GV%\grpc-protobuf-lite-%GV%.jar
 set CP=%CP%;%M2%\com\google\guava\guava\32.1.3-android\guava-32.1.3-android.jar
+set CP=%CP%;%M2%\com\google\guava\failureaccess\1.0.1\failureaccess-1.0.1.jar
+set CP=%CP%;%M2%\io\perfmark\perfmark-api\0.26.0\perfmark-api-0.26.0.jar
 set CP=%CP%;%M2%\javax\annotation\javax.annotation-api\1.3.2\javax.annotation-api-1.3.2.jar
 
 echo.
