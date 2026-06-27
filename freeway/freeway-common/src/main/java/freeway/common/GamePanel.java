@@ -10,7 +10,6 @@ import java.io.IOException;
 public class GamePanel extends JPanel {
 
     private static final int SHEET_COLS = 3;
-    private static final int SHEET_ROWS = 4;
 
     // Tiles de estrada
     private BufferedImage road21, road22, road23;   // cantos e meio da estrada
@@ -45,7 +44,7 @@ public class GamePanel extends JPanel {
         road71 = load(b + "/road_asphalt71.png");
         road85 = load(b + "/road_asphalt85.png");
         grassTile   = load(b + "/land_grass11.png");
-        framesRight = extractRow(load(b + "/chicken.png"), 1);
+        framesRight = extractFrames(load(b + "/chicken.png"));
         carSprites  = new BufferedImage[]{
             load(b + "/car_yellow_small_1.png"),
             load(b + "/car_blue_small_2.png"),
@@ -55,13 +54,13 @@ public class GamePanel extends JPanel {
         };
     }
 
-    private BufferedImage[] extractRow(BufferedImage src, int row) {
+    private BufferedImage[] extractFrames(BufferedImage src) {
         if (src == null) return new BufferedImage[]{null};
-        int fw = src.getWidth()  / SHEET_COLS;
-        int fh = src.getHeight() / SHEET_ROWS;
+        int fw = src.getWidth() / SHEET_COLS;
+        int fh = src.getHeight();
         BufferedImage[] f = new BufferedImage[SHEET_COLS];
         for (int c = 0; c < SHEET_COLS; c++)
-            f[c] = src.getSubimage(c * fw, row * fh, fw, fh);
+            f[c] = src.getSubimage(c * fw, 0, fw, fh);
         return f;
     }
 
